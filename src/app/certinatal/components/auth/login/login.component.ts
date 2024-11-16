@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import {UserService} from "../../../../services/user.service";
+import {FormGroup} from "@angular/forms";
+import {JwtService} from "../../../../services/stock/jwt.service";
+import {GotoService} from "../../../../services/goto/goto.service";
 
 @Component({
     selector: 'app-login',
@@ -13,11 +17,31 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
         }
     `]
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+    loginForm: FormGroup;
 
-    valCheck: string[] = ['remember'];
+    constructor(public layoutService: LayoutService, private UserService:UserService, private JwtService:JwtService,
+                private Goto: GotoService) { }
 
-    password!: string;
+    ngOnInit(): void {
+        this.createForm()
+    }
 
-    constructor(public layoutService: LayoutService) { }
+    createForm() {
+        this.loginForm = this.UserService.createForm();
+    }
+
+    sendDate(){
+        console.log(this.loginForm.value);
+        this.UserService.login(this.loginForm.value).subscribe(
+            res => {
+                console.log(res);
+                this.JwtService.stocktoken(res.bearer);
+                this.Goto.gotoHome();
+            },
+            err => {
+                console.log(err);
+            }
+        );
+    }
 }

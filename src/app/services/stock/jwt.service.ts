@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class JwtService {
 
-  KEY_TOKEN = "token"
+  KEY_TOKEN = "bearer_token"
 
   constructor() { }
 

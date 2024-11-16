@@ -1,30 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Validation } from '../models/validation';
+import {environment} from "../../environments/environment";
+import {FormBuilder, Validators} from "@angular/forms";
+import {Validation} from "../models/validation";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private loginUrl = 'http://localhost:8080/api/connexion';
-  // private logoutUrl = 'http://localhost:8000/accounts/api/logout/user/';
-  private register = 'http://localhost:8080/api/inscription';
-  private activation = 'http://localhost:8080/api/activation';
+  private apiulr = environment.api;
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private fb: FormBuilder) { }
 
-  login(data:any){
-    return this.http.post<any>(this.loginUrl, data);
+    createForm() {
+        return this.fb.group({
+            username: ['', Validators.required],
+            password: ['', Validators.required],
+        });
+    }
+
+  login(data:{username:string,password:string}):Observable<any>{
+    return this.http.post<any>(this.apiulr+`api/connexion`, data);
   }
 
   Register(user:any):Observable<any>{
-    return this.http.post(this.register,user);
+    return this.http.post(this.apiulr+`api/connexion`,user);
   }
 
   Activation(validation:Validation):Observable<any>{
-    return this.http.post(this.activation,validation);
+    return this.http.post(this.apiulr+`api/connexion`,validation);
   }
 
   isLoggedIn(): boolean {

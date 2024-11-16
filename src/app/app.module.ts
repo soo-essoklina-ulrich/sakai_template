@@ -11,11 +11,18 @@ import { EventService } from './certinatal/service/event.service';
 import { IconService } from './certinatal/service/icon.service';
 import { NodeService } from './certinatal/service/node.service';
 import { PhotoService } from './certinatal/service/photo.service';
+import {provideHttpClient, withInterceptors} from "@angular/common/http";
+import {interceptorJwtAddInterceptor} from "./services/interceptors/interceptor-jwt-add.interceptor";
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
     imports: [AppRoutingModule, AppLayoutModule],
     providers: [
+        provideHttpClient(
+            withInterceptors([
+                interceptorJwtAddInterceptor
+            ])
+        ),
         { provide: LocationStrategy, useClass: PathLocationStrategy },
         CountryService, CustomerService, EventService, IconService, NodeService,
         PhotoService, ProductService
