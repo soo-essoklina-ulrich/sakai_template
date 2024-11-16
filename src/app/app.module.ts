@@ -3,14 +3,14 @@ import { HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@a
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
-import { NotfoundComponent } from './demo/components/notfound/notfound.component';
-import { ProductService } from './demo/service/product.service';
-import { CountryService } from './demo/service/country.service';
-import { CustomerService } from './demo/service/customer.service';
-import { EventService } from './demo/service/event.service';
-import { IconService } from './demo/service/icon.service';
-import { NodeService } from './demo/service/node.service';
-import { PhotoService } from './demo/service/photo.service';
+import { NotfoundComponent } from './certinatal/components/notfound/notfound.component';
+import { ProductService } from './certinatal/service/product.service';
+import { CountryService } from './certinatal/service/country.service';
+import { CustomerService } from './certinatal/service/customer.service';
+import { EventService } from './certinatal/service/event.service';
+import { IconService } from './certinatal/service/icon.service';
+import { NodeService } from './certinatal/service/node.service';
+import { PhotoService } from './certinatal/service/photo.service';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
